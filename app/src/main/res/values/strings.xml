@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Twitter Kit For Android</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">Y2OeHyHNvVyIQJES62NHtebcJ</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">igpSaRkdVMlLF3rBXNilnCoDfWoHzaXphgPLcV4ihpkJJmfuqt</string>
 </resources>

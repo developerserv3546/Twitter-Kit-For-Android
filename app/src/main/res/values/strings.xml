@@ -2,4 +2,12 @@
     <string name="app_name">Twitter Kit For Android</string>
     <string name="com.twitter.sdk.android.CONSUMER_KEY">Y2OeHyHNvVyIQJES62NHtebcJ</string>
     <string name="com.twitter.sdk.android.CONSUMER_SECRET">igpSaRkdVMlLF3rBXNilnCoDfWoHzaXphgPLcV4ihpkJJmfuqt</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="error">Error!</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

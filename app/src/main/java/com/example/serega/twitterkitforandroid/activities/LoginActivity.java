@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Twitter.initialize(this);
-        setContentView(R.layout.login_main);
+        setContentView(R.layout.activity_login);
 
         TwitterSession session = TwitterCore.getInstance()
                 .getSessionManager().getActiveSession();
@@ -56,6 +56,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        loginButton.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            loginButton.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

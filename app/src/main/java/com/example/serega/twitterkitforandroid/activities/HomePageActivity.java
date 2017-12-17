@@ -11,12 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.serega.twitterkitforandroid.R;
-import com.example.serega.twitterkitforandroid.utils.Constant;
-import com.squareup.picasso.Picasso;
+import com.example.serega.twitterkitforandroid.utils.ImageLoader;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterCore;
@@ -25,12 +25,14 @@ import com.twitter.sdk.android.core.models.User;
 
 import retrofit2.Call;
 
-public class HomePageActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class HomePageActivity extends AppCompatActivity {
 
-    private ImageView profileImage;
-    private TextView userName;
-    private TextView userScreenName;
+    private LinearLayout profileBannerLayout;
+    private ImageView profileImageView;
+    private TextView userNameView;
+    private TextView userScreenNameView;
+    private TextView followingView;
+    private TextView followersView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +44,16 @@ public class HomePageActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         View headerLayout = navigationView.getHeaderView(0);
-        profileImage = headerLayout.findViewById(R.id.profile_image);
-        userName = headerLayout.findViewById(R.id.user_name);
-        userScreenName = headerLayout.findViewById(R.id.user_screen_name);
-
+        profileBannerLayout = headerLayout.findViewById(R.id.profile_banner);
+        profileImageView = headerLayout.findViewById(R.id.profile_image);
+        userNameView = headerLayout.findViewById(R.id.user_name);
+        userScreenNameView = headerLayout.findViewById(R.id.user_screen_name);
+        followingView = headerLayout.findViewById(R.id.tx_following);
+        followersView = headerLayout.findViewById(R.id.tx_followers);
 
         findViewById(R.id.action_new_twit).setOnClickListener(listener);
 
+        toolbar.setTitle(getString(R.string.app_name));
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -56,9 +61,6 @@ public class HomePageActivity extends AppCompatActivity
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-
-        navigationView.setNavigationItemSelectedListener(this);
 
         Call<User> userData = TwitterCore.getInstance()
                 .getApiClient()
@@ -85,15 +87,18 @@ public class HomePageActivity extends AppCompatActivity
 
     private void initUserDetails(User user) {
 
-        String profileImageUrl = user.profileImageUrl;
-        profileImageUrl = profileImageUrl.replace(Constant.NORMAL, Constant.BIGGER);
+        ImageLoader.setProfileBanner(profileBannerLayout, user.profileBannerUrl);
+        ImageLoader.setProfileImage(profileImageView, user.profileImageUrl);
 
-        Picasso.with(HomePageActivity.this)
-                .load(profileImageUrl)
-                .into(profileImage);
+        userNameView.setText(user.name);
+        userScreenNameView.setText(user.screenName);
 
-        userName.setText(user.name);
-        userScreenName.setText(user.screenName);
+        String friendsCount = getString(R.string.following_count, user.friendsCount);
+        followingView.setText(friendsCount);
+
+        String followersCount = getString(R.string.followers_count, user.followersCount);
+        followersView.setText(followersCount);
+
     }
 
     private final View.OnClickListener listener = new View.OnClickListener() {
@@ -113,7 +118,8 @@ public class HomePageActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+//            super.onBackPressed();
+            finish();
         }
     }
 
@@ -137,30 +143,5 @@ public class HomePageActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }

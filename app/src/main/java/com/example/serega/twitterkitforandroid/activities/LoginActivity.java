@@ -1,13 +1,15 @@
-package com.example.serega.twitterkitforandroid;
+package com.example.serega.twitterkitforandroid.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.example.serega.twitterkitforandroid.R;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
@@ -21,15 +23,27 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Twitter.initialize(this);
         setContentView(R.layout.login_main);
-        loginButton = findViewById(R.id.login_button);
-        loginButton.setCallback(twitterSessionCallback);
+
+        TwitterSession session = TwitterCore.getInstance()
+                .getSessionManager().getActiveSession();
+
+        if (session == null) {
+            loginButton = findViewById(R.id.login_button);
+            loginButton.setCallback(twitterSessionCallback);
+        } else {
+            startHomePageActivity();
+        }
+    }
+
+    private void startHomePageActivity() {
+        Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+        startActivity(intent);
     }
 
     private final Callback<TwitterSession> twitterSessionCallback = new Callback<TwitterSession>() {
         @Override
         public void success(Result<TwitterSession> result) {
-            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
-            startActivity(intent);
+            startHomePageActivity();
         }
 
         @Override

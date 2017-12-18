@@ -7,8 +7,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,8 +29,13 @@ public class HomePageActivity extends AppCompatActivity {
     private ImageView profileImageView;
     private TextView userNameView;
     private TextView userScreenNameView;
+    private TextView profileCreatedView;
+    private TextView descriptionView;
+    private TextView locationView;
     private TextView followingView;
     private TextView followersView;
+    private TextView favouritesCountView;
+    private TextView listedCountView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +51,13 @@ public class HomePageActivity extends AppCompatActivity {
         profileImageView = headerLayout.findViewById(R.id.profile_image);
         userNameView = headerLayout.findViewById(R.id.user_name);
         userScreenNameView = headerLayout.findViewById(R.id.user_screen_name);
+        descriptionView = headerLayout.findViewById(R.id.tx_description);
+        locationView = headerLayout.findViewById(R.id.tx_location);
+        profileCreatedView = headerLayout.findViewById(R.id.tx_profile_created);
         followingView = headerLayout.findViewById(R.id.tx_following);
         followersView = headerLayout.findViewById(R.id.tx_followers);
+        favouritesCountView = headerLayout.findViewById(R.id.tx_favourites);
+        listedCountView = headerLayout.findViewById(R.id.tx_lists);
 
         findViewById(R.id.action_new_twit).setOnClickListener(listener);
 
@@ -93,11 +101,26 @@ public class HomePageActivity extends AppCompatActivity {
         userNameView.setText(user.name);
         userScreenNameView.setText(user.screenName);
 
+        String description = getString(R.string.description, user.description);
+        descriptionView.setText(description);
+
+        String location = getString(R.string.location, user.location);
+        locationView.setText(location);
+
+        String createdAt = getString(R.string.created_at, user.createdAt);
+        profileCreatedView.setText(createdAt);
+
         String friendsCount = getString(R.string.following_count, user.friendsCount);
         followingView.setText(friendsCount);
 
+        String favouritesCount = getString(R.string.favourites_count, user.favouritesCount);
+        favouritesCountView.setText(favouritesCount);
+
         String followersCount = getString(R.string.followers_count, user.followersCount);
         followersView.setText(followersCount);
+
+        String listedCount = getString(R.string.listed_count, user.listedCount);
+        listedCountView.setText(listedCount);
 
     }
 
@@ -118,30 +141,8 @@ public class HomePageActivity extends AppCompatActivity {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-//            super.onBackPressed();
-            finish();
+            finishAffinity();
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_page, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

@@ -17,4 +17,15 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="TextUserDetails">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/user_details_text_size</item>
+        <item name="android:paddingStart">@dimen/user_details_text_padding_start</item>
+        <item name="android:paddingEnd">@dimen/user_details_text_padding_end</item>
+        <item name="android:paddingTop">@dimen/user_details_text_padding_top</item>
+        <item name="android:textColor">@color/colorTextUserDetails</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
 </resources>

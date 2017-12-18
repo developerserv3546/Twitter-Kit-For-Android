@@ -43,14 +43,33 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tx_description"
+            style="@style/TextUserDetails" />
+
+        <TextView
+            android:id="@+id/tx_location"
+            style="@style/TextUserDetails" />
+
+        <TextView
+            android:id="@+id/tx_profile_created"
+            style="@style/TextUserDetails" />
+
+        <TextView
             android:id="@+id/tx_following"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            style="@style/TextUserDetails" />
 
         <TextView
             android:id="@+id/tx_followers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            style="@style/TextUserDetails" />
+
+        <TextView
+            android:id="@+id/tx_favourites"
+            style="@style/TextUserDetails" />
+
+        <TextView
+            android:id="@+id/tx_lists"
+            style="@style/TextUserDetails" />
+
     </LinearLayout>
 </ScrollView>
 

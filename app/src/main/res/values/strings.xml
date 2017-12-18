@@ -9,10 +9,15 @@
 
     <string name="error">Oops! Something went wrong!</string>
 
-    <string name="action_settings">Settings</string>
     <string name="profile_image">profile image</string>
-    <string name="following">Following</string>
-    <string name="followers">Followers</string>
-    <string name="following_count">Following - %1$d</string>
-    <string name="followers_count">Followers - %1$d</string>
+    <string name="description">Description: %1$s</string>
+    <string name="location">Location: %1$s</string>
+    <string name="created_at">Created at %1$s</string>
+    <string name="following_count">Following: %1$d</string>
+    <string name="followers_count">Followers: %1$d</string>
+    <string name="favourites_count">Favourites: %1$d</string>
+    <string name="listed_count">Lists: %1$d</string>
+
+
+    <string name="action_settings">Settings</string>
 </resources>
